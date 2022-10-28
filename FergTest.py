@@ -35,17 +35,15 @@ def hide_game_phrase(game_phrase):
             hidden_game_phrase += ("_")
 
     guess_phrase = hidden_game_phrase[:-1] # removes last space as underscore
-    print(guess_phrase)
+    # print(guess_phrase)
+    return guess_phrase
 
         
         
 
 # starts the game
 def start():
-    hide_game_phrase(gen_random_phrase())
+    the_phrase = hide_game_phrase(gen_random_phrase())
+    print(the_phrase)
+    return the_phrase
 
-def main():
-    start()
-
-
-main()

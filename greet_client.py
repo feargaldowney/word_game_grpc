@@ -5,36 +5,39 @@ import grpc
 import FergTest
 
 """
+NOTE:
+1. Changed instances of 'hello' to 'guess'
+2. Changed instances of 'name' to 'game_phrase'
+
+
 TODO:
-1. Commit  to github before progressing!
-2. Well done sir
-3. Only a little more to go.
 """
 def get_client_stream_requests():
+
+    phrase = FergTest.start()
     while True:
         name = input("Please enter a name (or nothing to stop chatting): ")
 
         if name == "":
             break
 
-        hello_request = greet_pb2.HelloRequest(greeting = "Hello", name = name)
+        hello_request = greet_pb2.helloRequest(greeting = "LETTER", name = "DEBUGGING ------ FergTest.start()")
         yield hello_request
         time.sleep(1)
 
 def run():
+    phrase = FergTest.start()
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = greet_pb2_grpc.GreeterStub(channel)
-        # print("1. SayHello - Unary")
-        # print("2. ParrotSaysHello - Server Side Streaming")
-        # print("3. ChattyClientSaysHello - Client Side Streaming")
-        # print("4. InteractingHello - Both Streaming")
         rpc_call = input("Please guess a letter > ") #"Which rpc would you like to make: "
 
-        if rpc_call == "1":
-            hello_request = greet_pb2.HelloRequest(greeting = "Hello", name = "Ferg")
+        if rpc_call.isalpha():
+            hello_request = greet_pb2.HelloRequest(greeting = rpc_call, name = phrase)
             hello_reply = stub.SayHello(hello_request)
-            print("SayHello Response Received:")
+            print("Guess Response Received:")
             print(hello_reply)
+        else:
+            print("YOU DIED.... just kidding, try guessing a letter next time :) ")
 
         
 

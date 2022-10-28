@@ -10,6 +10,7 @@ class GreeterServicer(greet_pb2_grpc.GreeterServicer):
         print("SayHello Request Made:")
         print(request)
         hello_reply = greet_pb2.HelloReply()
+        
         hello_reply.message = f"{request.greeting} {request.name}"
 
         return hello_reply
